@@ -17,9 +17,17 @@ short addVertice(Grafo *G)
     return 1;
 }
 
-short addAresta(Grafo *G,int vert1,int vert2)
+short addAresta(Grafo *G,int vertice_1,int vertice_2,unsigned tamanho_aresta)
 {
-    
+    Tnode *aux2;
+    Tnode *aux1;
+    aux1=searchlistbyposi(vertice_1,G->vertices);
+    aux2=searchlistbyposi(vertice_2,G->vertices);
+
+
+
+
+
 }
 
 void errorPrinter(int code)
