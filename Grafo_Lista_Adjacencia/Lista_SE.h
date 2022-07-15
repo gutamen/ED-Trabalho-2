@@ -28,3 +28,4 @@ Tdado removeRight(TlistSE *L);
 Tnode* searchlist( Tdado x, TlistSE L);
 int insertlist(Tdado x,unsigned p,TlistSE *L);
 Tdado removelist(unsigned p,TlistSE *L);
+Tnode* searchlistbyposi( int posi , TlistSE L);

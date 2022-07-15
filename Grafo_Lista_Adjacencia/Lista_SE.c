@@ -156,7 +156,17 @@ Tnode* searchlist( Tdado x, TlistSE L)      //procura na lista
     return aux;
 }
 
-
+Tnode* searchlistbyposi( int posi , TlistSE L)      //retorna endereço do Tnode na posição desejada 
+{
+    Tnode *aux=L.first;
+    int i=0;
+    while(aux && i < posi)
+    {
+        aux=aux->next;
+        i++;
+    }
+    return aux;
+}
 
 
 int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
