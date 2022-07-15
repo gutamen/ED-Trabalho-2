@@ -35,8 +35,8 @@ void deletelist(TlistSE *L)                 //destruição da lista
 
 }
 
-//impressao da lista
-void printlist(TlistSE L)
+
+void printlist(TlistSE L)                   //impressao da lista
 {
     Tnode *p = L.first;
 
@@ -52,38 +52,38 @@ void printlist(TlistSE L)
 
 }
 
-//insercao a esquerda
-short insertLeft(Tdado x, TlistSE *L)
+
+short insertLeft(Tdado x, TlistSE *L)       //insercao a esquerda          
 {
     Tnode *aux;
     aux= (Tnode*)malloc(sizeof(Tnode));
     if(aux==NULL)
-        return 1; // retorna 1 sinalizando falha na alocacao
-                  // lista orginal intacta
+        return 1;                           // retorna 1 sinalizando falha na alocacao
+                                            // lista orginal intacta
     else
     {
-        aux->info = x; // insere o valor de x no node
-        aux->next = L->first; // insere o novo elemento antes do atual primeiro
-        L->first = aux; // aux passa ser o primeiro
-        if (L->last==NULL) // ajusta o ultimo
+        aux->info = x;                      // insere o valor de x no node
+        aux->next = L->first;               // insere o novo elemento antes do atual primeiro
+        L->first = aux;                     // aux passa ser o primeiro
+        if (L->last==NULL)                  // ajusta o ultimo
             L->last= aux;
-        L->lenght++; // incrementa o numero de elementos
+        L->lenght++;                        // incrementa o numero de elementos
         return 0;
     }
 }
 
-//insercao a direita
-short insertRight(Tdado x, TlistSE *L)
+
+short insertRight(Tdado x, TlistSE *L)      //insercao a direita
 {
     Tnode *aux =(Tnode*)malloc(sizeof(Tnode));
     if(aux == NULL)
-        return 1; //sinaliza erro de alocacao
+        return 1;                           //sinaliza erro de alocacao
     else
     {
         aux->info=x;
         aux->next=NULL;
-        if(L->first==NULL)//lista vazia
-            L->first=L->last=aux;//first e last o mesmo node
+        if(L->first==NULL)                  //lista vazia
+            L->first=L->last=aux;           //first e last o mesmo node
         else
         {
             L->last->next=aux;
@@ -95,36 +95,36 @@ short insertRight(Tdado x, TlistSE *L)
 }
 
 
-// verifica lista vazia
-bool emptylist(TlistSE L)
+
+bool emptylist(TlistSE L)                   // verifica lista vazia
 {
     return(L.lenght==0);
 }
 
-//comprimento da lista
-short leghtList(TlistSE L)
+
+short leghtList(TlistSE L)                  //comprimento da lista
 {
     return(L.lenght);
 }
 
-//remocao esquerda
-Tdado removeleft(TlistSE *L)
+
+Tdado removeleft(TlistSE *L)                //remocao esquerda
 {
-    Tnode *aux = L->first;// node a ser removido
-    Tdado Ret =aux->info; // info do dado a ser removido
+    Tnode *aux = L->first;                  // node a ser removido
+    Tdado Ret =aux->info;                   // info do dado a ser removido
     L->first=L->first->next;
     free(aux);
     L->lenght--;
-    if(L->lenght==0)//lista vazia
+    if(L->lenght==0)                        //lista vazia
         L->last=NULL;
     return Ret;
 }
 
-// remocao direita
-Tdado removeRight(TlistSE *L)
+
+Tdado removeRight(TlistSE *L)               // remocao direita
 {
-    Tnode *aux = L->last; // node a ser removido
-    Tdado ret = aux ->info; // INFO DO node a ser destruido
+    Tnode *aux = L->last;                   // node a ser removido
+    Tdado ret = aux ->info;                 // INFO DO node a ser destruido
 
     if(L->first==L->last)
     {
@@ -146,7 +146,7 @@ Tdado removeRight(TlistSE *L)
     return ret;
 }
 
-Tnode* searchlist( Tdado x, TlistSE L)
+Tnode* searchlist( Tdado x, TlistSE L)      //procura na lista
 {
     Tnode *aux=L.first;
     while(aux && x != aux->info)
@@ -158,22 +158,21 @@ Tnode* searchlist( Tdado x, TlistSE L)
 
 
 
-//iserir no meio da lista
-int insertlist(Tdado x,unsigned p,TlistSE *L)
+
+int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
 {
     if (p>L->lenght)
         return 1;
     else
     {
-        // insercao na posicao 0
+                                            // insercao na posicao 0
         if(p==0)
             return insertLeft(x,L);
-        else if (p == L->lenght)// insercao na ultima posicao
+        else if (p == L->lenght)            // insercao na ultima posicao
             return insertRight(x,L);
         else
         {
-            // procurar pelo local da insercao
-            Tnode *p1 =L->first,*aux;
+            Tnode *p1 =L->first,*aux;       // procurar pelo local da insercao
             unsigned i=0;
             aux= (Tnode*)malloc(sizeof(Tnode));
             if(!aux)
@@ -194,22 +193,20 @@ int insertlist(Tdado x,unsigned p,TlistSE *L)
     }       
 }
 
-//remover no meio da lista
-Tdado removelist(unsigned p,TlistSE *L)
+
+Tdado removelist(unsigned p,TlistSE *L)     //remover no meio da lista
 {
     if (p>L->lenght)
         exit(1);
     else
     {
-        // remover na posicao 0
-        if(p==0)
+        if(p==0)                            // remover na posicao 0
             return removeleft(L);
-        else if (p == L->lenght-1)// remove na ultima posicao
+        else if (p == L->lenght-1)          // remove na ultima posicao
             return removeRight(L);
         else
         {
-            // procurar pelo local da remocao
-            Tnode *p1 =L->first,*aux;
+            Tnode *p1 =L->first,*aux;       // procurar pelo local da remocao
             Tdado ret;
             unsigned i=0;
             while (++i<p)

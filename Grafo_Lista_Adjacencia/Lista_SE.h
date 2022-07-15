@@ -19,7 +19,7 @@ void intitlist(TlistSE *L);
 void deletelist(TlistSE *L);
 void printlist(TlistSE L);
 short insertLeft(Tdado x, TlistSE *L);
-short insertLeft(Tdado x, TlistSE *L);
+short insertRight(Tdado x, TlistSE *L);
 bool emptylist(TlistSE L);
 short leghtList(TlistSE L);
 Tdado removeleft(TlistSE *L);
