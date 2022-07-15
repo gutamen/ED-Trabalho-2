@@ -1,9 +1,10 @@
 
-typedef int Tdado;              // define o tipo de dado dentro do node
+typedef long long int Tdado;              // define o tipo de dado dentro do node
 
 typedef struct Tnode
 {
     Tdado info;                 //dado armazenado no node
+    unsigned distancia;
     struct Tnode *next;         //ponteiro para o proximo node
 }Tnode;
 

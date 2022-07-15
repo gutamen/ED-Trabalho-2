@@ -1,14 +1,14 @@
 
-#include <Lista_SE.h>
+#include "Lista_SE.h"
 
 
 typedef struct Vertice
 {
     TlistSE arestas;
-};
+}Vertice;
 
 
 typedef struct Grafo
 {
-    Vertice vertices; 
-};
+    TlistSE vertices; 
+}Grafo;
