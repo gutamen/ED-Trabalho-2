@@ -1,3 +1,4 @@
+#include <stdbool.h>
 
 typedef long long int Tdado;              // define o tipo de dado dentro do node
 
@@ -26,6 +27,9 @@ short leghtList(TlistSE L);
 Tdado removeleft(TlistSE *L);
 Tdado removeRight(TlistSE *L);
 Tnode* searchlist( Tdado x, TlistSE L);
+int searchposiinlist( Tnode *x, TlistSE L);
+Tnode* searchlistbyposi( int posi , TlistSE L);
 int insertlist(Tdado x,unsigned p,TlistSE *L);
 Tdado removelist(unsigned p,TlistSE *L);
-Tnode* searchlistbyposi( int posi , TlistSE L);
+short insertRightifDistance(Tdado x,unsigned distancia, TlistSE *L);
+

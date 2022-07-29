@@ -10,7 +10,7 @@
 
 //========================================================
 // function de lista encadeada
-//========================================================
+//======================================================== 
 
 
 void intitlist(TlistSE *L)                  //inicialização da Lista
@@ -43,7 +43,7 @@ void printlist(TlistSE L)                   //impressao da lista
     printf("[");
     while (p)
     {
-        printf("%d",p->info);
+        printf("%lld",p->info);
         if(p->next)
             printf(", ");
         p=p->next;
@@ -156,6 +156,18 @@ Tnode* searchlist( Tdado x, TlistSE L)      //procura na lista
     return aux;
 }
 
+int searchposiinlist( Tnode *x, TlistSE L)      //procura posição do nodo na lista
+{
+    Tnode *aux=L.first;
+    int i=0;
+    while(aux && x != aux)
+    {
+        aux=aux->next;
+        i++;
+    }
+    return i;
+}
+
 Tnode* searchlistbyposi( int posi , TlistSE L)      //retorna endereço do Tnode na posição desejada 
 {
     Tnode *aux=L.first;
@@ -233,6 +245,31 @@ Tdado removelist(unsigned p,TlistSE *L)     //remover no meio da lista
     }       
 }
 
+
+short insertRightifDistance(Tdado x,unsigned int distancia, TlistSE *L)      //insercao a direita com a distancia
+{
+    Tnode *aux =(Tnode*)malloc(sizeof(Tnode));
+    if(aux == NULL)
+        return 1;                           //sinaliza erro de alocacao
+    else
+    {
+        aux->info=x;
+        aux->next=NULL;
+        if(L->first==NULL)                  //lista vazia
+        {
+            L->first=L->last=aux;           //first e last o mesmo node
+            aux->distancia=distancia;
+        }    
+        else
+        {
+            L->last->next=aux;
+            aux->distancia=distancia;
+            L->last=aux;
+        }
+        L->lenght++;
+        return 0;
+    }
+}
 
 
 
