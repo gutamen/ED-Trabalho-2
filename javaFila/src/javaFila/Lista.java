@@ -28,18 +28,19 @@ public class Lista {
     
     //buscar elementos
     public int[] search(int x){
-        dataStructLista nodo;
+        dataStructLista nodo = new dataStructLista();
         int i = 0;
-        int[] aux = new int[2];
+        int[] aux = new int[3];
+        nodo = init;
         for(nodo = init; nodo != null; nodo = nodo.getNext()){
             i++;
+            if (x == nodo.getVal()){
+                aux[1] = 1;
+                aux[2] = i;
+                return aux;
+            }
         }
         //caso encontrar elementos
-        if (x == nodo.getVal()){
-            aux[1] = 1;
-            aux[2] = i;
-            return aux;
-        }
         aux[1] = 0;
         aux[2] = i;
         return aux;         
