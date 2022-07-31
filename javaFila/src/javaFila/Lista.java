@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package javaLista;
+package javaFila;
 import java.util.Scanner;
 /**
  *
@@ -14,16 +14,12 @@ public class Lista {
      */
         //usado para iniciar a lista
     public dataStructLista init;
-    public dataStructFila init1;
     
     //construtor da lista
     public void list(){  
         init = null;
     }
     
-    public void fill(){                                          
-        init1 = null;
-    }
 
     //limpar lista
     public boolean isEmpty(){
