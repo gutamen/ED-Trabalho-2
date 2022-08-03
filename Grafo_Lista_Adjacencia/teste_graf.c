@@ -15,10 +15,16 @@ int main()
     addVertice(&grafo);
     addVertice(&grafo);
     addAresta(&grafo,0,2,10);
-
+    addAresta(&grafo,1,3,6);
+    addAresta(&grafo,0,1,3);
+    
     printGrafo(grafo);
    
+    printexistearesta(&grafo,2,0);
 
+    removeAresta(&grafo,2,0);
+
+    printGrafo(grafo);
 
 
     return 0;
