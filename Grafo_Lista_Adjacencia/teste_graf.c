@@ -20,9 +20,9 @@ int main()
     
     printGrafo(grafo);
    
-    printexistearesta(&grafo,2,0);
+    printexistearesta(&grafo,0,3);
 
-    removeAresta(&grafo,2,0);
+    removeAresta(&grafo,0,2);
 
     printGrafo(grafo);
 

@@ -96,17 +96,15 @@ Tnode* existearesta(Grafo *G, int vertice_1, int vertice_2)
 short removeAresta(Grafo *G,int vertice_1, int vertice_2)
 {
     
-    Tnode *aux =existearesta(G, vertice_1, vertice_2);
+    Tnode *aux = existearesta(G, vertice_1, vertice_2);
+    Tnode *aux2 = existearesta(G, vertice_2, vertice_1);
     if(aux!=NULL)
     {
-        Tnode *aux2 = searchlistbyposi(vertice_2,&G->vertices);
-        TlistSE *vertice = aux2->info;
-        int posi = searchposiinlist(aux,vertice);
-        posi--;
-        printf("%d %d\n",posi,vertice->lenght);
-        removelist(posi,vertice);
-        aux2 = searchlistbyposi(vertice_1,&G->vertices);
-        vertice = aux2->info;
+        Tnode *aux3 = searchlistbyposi(vertice_2,&G->vertices);
+        TlistSE *vertice = aux3->info;
+        removelist(searchposiinlist(aux2,vertice),vertice);
+        aux3 = searchlistbyposi(vertice_1,&G->vertices);
+        vertice = aux3->info;
         removelist(searchposiinlist(aux,vertice),vertice);
         return 0;
         

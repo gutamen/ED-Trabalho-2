@@ -222,7 +222,10 @@ int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
 Tdado removelist(unsigned p,TlistSE *L)     //remover no meio da lista
 {
     if (p>L->lenght)
-        exit(1);
+    {                        // printa erro
+        printf("Erro ao remover !!\n");
+        return NULL;
+    }
     else
     {
         if(p==0)                            // remover na posicao 0
