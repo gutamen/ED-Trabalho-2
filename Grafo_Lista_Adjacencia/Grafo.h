@@ -21,3 +21,4 @@ void printGrafo(Grafo grafo);
 Tnode* existearesta(Grafo *G, int Vertice_1, int Vertice_2);
 short removeAresta(Grafo *G,int vertice_1, int vertice_2);
 void printexistearesta(Grafo *G, int vertice_1, int vertice_2);
+short removeVertice(Grafo *G, unsigned vertice);

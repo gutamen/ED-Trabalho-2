@@ -114,11 +114,12 @@ short removeAresta(Grafo *G,int vertice_1, int vertice_2)
             
         }
         else
-            print("Tentativa de remocao invalida, nao existe aresta entre tais vertices.\n");
+            printf("Tentativa de remocao invalida, nao existe aresta entre tais vertices.\n");
     }
-    
+
     return 1;
 }
+
 
 void printexistearesta(Grafo *G, int vertice_1, int vertice_2)
 {
@@ -133,7 +134,29 @@ void printexistearesta(Grafo *G, int vertice_1, int vertice_2)
     }
 }
 
-void errorPrinter(int code)
+short removeVertice(Grafo *G, unsigned vertice1)
 {
+    if(!emptylist(G->vertices))
+    {
+        Tnode *aux = searchlistbyposi(vertice1,&G->vertices);
+        TlistSE *verticeL = aux->info;
+        while(!emptylist(*verticeL))
+        {
+            Tnode *aux2 = G->vertices.first;
+            int OndeVaiAresta=0;
+            while(verticeL->first->info!=aux2->info && aux2)
+            {
+                aux2=aux2->next;
+                OndeVaiAresta++;
+            }
+            removeAresta(G,vertice1,OndeVaiAresta);
+
+            
+        } 
+        removelist(vertice1,&G->vertices);
+    }
+    else
+        printf("Grafo Vazio.\n");
+    return 0;
 
 }

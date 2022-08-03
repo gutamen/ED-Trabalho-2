@@ -9,7 +9,8 @@ int main()
 {
     //getchar();
     Grafo grafo;
-    initGrafo(&grafo);
+    
+    printGrafo(grafo);
     addVertice(&grafo);
     addVertice(&grafo);
     addVertice(&grafo);
@@ -23,7 +24,8 @@ int main()
    
     printexistearesta(&grafo,0,3);
 
-    removeAresta(&grafo,1,0);
+    removeVertice(&grafo,0);
+    removeVertice(&grafo,1);
 
     printGrafo(grafo);
 
