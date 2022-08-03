@@ -12,25 +12,35 @@ short addVertice(Grafo *G)
     intitlist(&new->arestas);
     insertRight(new,&G->vertices);
     return 0;
-    
-
 }
 
-short addAresta(Grafo *G,int vertice_1,int vertice_2,unsigned tamanho_aresta)
+short addAresta(Grafo *G,int vertice_1,int vertice_2,unsigned tamanho_aresta)   // adiciona uma aresta entre 2 vertices, necessario o tamanho
 {
-
-    if(vertice_1<leghtList(G->vertices) && vertice_2<leghtList(G->vertices))
+    if(tamanho_aresta != 0)
     {
-        Tnode *aux2;
-        Tnode *aux1;
-        aux1=searchlistbyposi(vertice_1,&G->vertices);
-        aux2=searchlistbyposi(vertice_2,&G->vertices);
-        TlistSE *vert1 = aux1->info, *vert2 = aux2->info;
-        insertRightifDistance(aux1->info, tamanho_aresta, vert2);
-        insertRightifDistance(aux2->info, tamanho_aresta, vert1);
-        return 0;
+        if(vertice_1 != vertice_2)
+        {
+            if(vertice_1<leghtList(G->vertices) && vertice_2<leghtList(G->vertices))
+            {
+                Tnode *aux2;
+                Tnode *aux1;
+                aux1=searchlistbyposi(vertice_1,&G->vertices);
+                aux2=searchlistbyposi(vertice_2,&G->vertices);
+                TlistSE *vert1 = aux1->info, *vert2 = aux2->info;
+                insertRightifDistance(aux1->info, tamanho_aresta, vert2);
+                insertRightifDistance(aux2->info, tamanho_aresta, vert1);
+                return 0;
+            }
+            else
+                printf("Vertice nao existente solicitada.\n");                  // caso vertice nao exista
+        }
+        else
+        {
+            printf("Impossivel inserir aresta com destino == origem.\n");       // caso tente fazer loop em um grafo nao direcionado
+        }
     }
-
+    else 
+        printf("Tamanho == 0 nao eh permitido.\n");                             // caso a distancia seja == 0 nao existe distancia, tarefa impossivel
     return 1;
 
 
@@ -39,10 +49,12 @@ short addAresta(Grafo *G,int vertice_1,int vertice_2,unsigned tamanho_aresta)
 }
 
 
-void printGrafo(Grafo grafo)
+void printGrafo(Grafo grafo)                    // imprime cada vertice do grafo com suas respectivas arestas
 {
     int l=0,i=0;
     Tnode *aux =grafo.vertices.first;
+    if (aux == NULL)
+        printf("Grafo vazio.\n");               // se o grafo esta vazio
     while(aux)
     {
         int k=0;
@@ -68,47 +80,43 @@ void printGrafo(Grafo grafo)
     }
 }
 
-Tnode* existearesta(Grafo *G, int vertice_1, int vertice_2)
+Tnode* existearesta(Grafo *G, int vertice_1, int vertice_2)     // testa se existe aresta entre 2 vertices, retorna o nodo da aresta do vertice 1 caso exista
 {
     Tnode *aux = searchlistbyposi(vertice_1,&G->vertices);
     TlistSE *vertice1 = aux->info;
     aux = searchlistbyposi(vertice_2,&G->vertices);
     Tnode *aux2 = vertice1->first;
-    while (aux2!=NULL)
+    while (aux2)
     {
         if(aux2->info==aux->info)
             break;
         aux2=aux2->next;
     }
-    if(aux2)
-    {
-        
-        return aux2;
-    }
-    else
-    {
-        
-        return NULL;
-    }
+    return aux2;   
 }
 
 
 short removeAresta(Grafo *G,int vertice_1, int vertice_2)
 {
-    
-    Tnode *aux = existearesta(G, vertice_1, vertice_2);
-    Tnode *aux2 = existearesta(G, vertice_2, vertice_1);
-    if(aux!=NULL)
+    if(vertice_1<leghtList(G->vertices) && vertice_2<leghtList(G->vertices))
     {
-        Tnode *aux3 = searchlistbyposi(vertice_2,&G->vertices);
-        TlistSE *vertice = aux3->info;
-        removelist(searchposiinlist(aux2,vertice),vertice);
-        aux3 = searchlistbyposi(vertice_1,&G->vertices);
-        vertice = aux3->info;
-        removelist(searchposiinlist(aux,vertice),vertice);
-        return 0;
-        
+        Tnode *aux = existearesta(G, vertice_1, vertice_2);
+        Tnode *aux2 = existearesta(G, vertice_2, vertice_1);
+        if(aux!=NULL)
+        {
+            Tnode *aux3 = searchlistbyposi(vertice_2,&G->vertices);
+            TlistSE *vertice = aux3->info;
+            removelist(searchposiinlist(aux2,vertice),vertice);
+            aux3 = searchlistbyposi(vertice_1,&G->vertices);
+            vertice = aux3->info;
+            removelist(searchposiinlist(aux,vertice),vertice);
+            return 0;
+            
+        }
+        else
+            print("Tentativa de remocao invalida, nao existe aresta entre tais vertices.\n");
     }
+    
     return 1;
 }
 

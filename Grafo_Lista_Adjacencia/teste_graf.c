@@ -18,11 +18,12 @@ int main()
     addAresta(&grafo,1,3,6);
     addAresta(&grafo,0,1,3);
     
+    
     printGrafo(grafo);
    
     printexistearesta(&grafo,0,3);
 
-    removeAresta(&grafo,0,2);
+    removeAresta(&grafo,1,0);
 
     printGrafo(grafo);
 
