@@ -9,8 +9,7 @@ int main()
 {
     //getchar();
     Grafo grafo;
-    
-    printGrafo(grafo);
+    initGrafo(&grafo);
     addVertice(&grafo);
     addVertice(&grafo);
     addVertice(&grafo);
@@ -21,13 +20,12 @@ int main()
     
     
     printGrafo(grafo);
-   
+    removeAresta(&grafo,0,2);
+
     printexistearesta(&grafo,0,3);
-
-    removeVertice(&grafo,0);
-    removeVertice(&grafo,1);
-
     printGrafo(grafo);
+    printVerticeN(grafo,0);
+
 
 
     return 0;

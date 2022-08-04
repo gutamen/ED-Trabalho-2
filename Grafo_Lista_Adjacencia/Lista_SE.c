@@ -36,21 +36,6 @@ void deletelist(TlistSE *L)                 //destruição da lista
 }
 
 
-void printlist(TlistSE L)                   //impressao da lista
-{
-    Tnode *p = L.first;
-
-    printf("[");
-    while (p)
-    {
-        printf("%lld",p->info);
-        if(p->next)
-            printf(", ");
-        p=p->next;
-    }
-    printf("]\n");
-
-}
 
 
 short insertLeft(Tdado x, TlistSE *L)       //insercao a esquerda          
@@ -252,8 +237,8 @@ Tdado removelist(unsigned p,TlistSE *L)     //remover no meio da lista
 }
 
 
-short insertRightifDistance(Tdado x,unsigned int distancia, TlistSE *L)      //insercao a direita com a distancia
-{                                                                            //pensado para o vertice
+short insertRightifDistance(Tdado x,int distancia, TlistSE *L)              //insercao a direita com a distancia
+{                                                                           //pensado para o vertice
     Tnode *aux =(Tnode*)malloc(sizeof(Tnode));
     if(aux == NULL)
         return 1;                           //sinaliza erro de alocacao
