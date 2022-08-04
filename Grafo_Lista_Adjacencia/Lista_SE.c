@@ -38,7 +38,7 @@ void deletelist(TlistSE *L)                 //destruição da lista
 
 
 
-short insertLeft(Tdado x, TlistSE *L)       //insercao a esquerda          
+int insertLeft(Tdado x, TlistSE *L)       //insercao a esquerda          
 {
     Tnode *aux;
     aux= (Tnode*)malloc(sizeof(Tnode));
@@ -58,7 +58,7 @@ short insertLeft(Tdado x, TlistSE *L)       //insercao a esquerda
 }
 
 
-short insertRight(Tdado x, TlistSE *L)      //insercao a direita
+int insertRight(Tdado x, TlistSE *L)      //insercao a direita
 {
     Tnode *aux =(Tnode*)malloc(sizeof(Tnode));
     if(aux == NULL)
@@ -87,7 +87,7 @@ bool emptylist(TlistSE L)                   // verifica lista vazia
 }
 
 
-short leghtList(TlistSE L)                  //comprimento da lista
+int leghtList(TlistSE L)                  //comprimento da lista
 {
     return(L.lenght);
 }
@@ -169,9 +169,9 @@ Tnode* searchlistbyposi( int posi , TlistSE *L)      //retorna endereço do Tnod
 }
 
 
-int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
+int insertlist(Tdado x,int p,TlistSE *L)//iserir no meio da lista
 {
-    if (p>L->lenght)
+    if (p>L->lenght || p<0)
         return 1;
     else
     {
@@ -188,7 +188,7 @@ int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
             if(!aux)
             {
                 printf("ERRO nao foi possivel alocar\n");
-                return 1;
+                return 2;
             }
             while (++i<p)
             {
@@ -204,9 +204,9 @@ int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
 }
 
 
-Tdado removelist(unsigned p,TlistSE *L)     //remover no meio da lista
+Tdado removelist(int p,TlistSE *L)     //remover no meio da lista
 {
-    if (p>L->lenght)
+    if (p>L->lenght || p<0)
     {                        // printa erro
         printf("Erro ao remover !!\n");
         return NULL;
@@ -237,7 +237,7 @@ Tdado removelist(unsigned p,TlistSE *L)     //remover no meio da lista
 }
 
 
-short insertRightifDistance(Tdado x,int distancia, TlistSE *L)              //insercao a direita com a distancia
+int insertRightifDistance(Tdado x,int distancia, TlistSE *L)              //insercao a direita com a distancia
 {                                                                           //pensado para o vertice
     Tnode *aux =(Tnode*)malloc(sizeof(Tnode));
     if(aux == NULL)

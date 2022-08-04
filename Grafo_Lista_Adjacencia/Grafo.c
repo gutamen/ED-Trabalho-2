@@ -14,12 +14,16 @@ int addVertice(Grafo *G)
 {
 
     Vertice *new=(Vertice*)malloc(sizeof(Vertice));
-    intitlist(&new->arestas);
-    insertRight(new,&G->vertices);
-    return 0;
+    if(new)
+    {
+        intitlist(&new->arestas);
+        insertRight(new,&G->vertices);
+        return 0;
+    }
+    return 1;
 }
 
-int addAresta(Grafo *G,int vertice_1,int vertice_2,int tamanho_aresta)   // adiciona uma aresta entre 2 vertices, necessario o tamanho
+int addAresta(Grafo *G, int vertice_1, int vertice_2, int tamanho_aresta)   // adiciona uma aresta entre 2 vertices, necessario o tamanho
 {
     if(tamanho_aresta > 0)
     {
@@ -27,14 +31,31 @@ int addAresta(Grafo *G,int vertice_1,int vertice_2,int tamanho_aresta)   // adic
         {
             if(vertice_1<leghtList(G->vertices) && vertice_2<leghtList(G->vertices))
             {
-                Tnode *aux2;
-                Tnode *aux1;
-                aux1=searchlistbyposi(vertice_1,&G->vertices);
-                aux2=searchlistbyposi(vertice_2,&G->vertices);
-                Vertice *vert1 = aux1->info, *vert2 = aux2->info;
-                insertRightifDistance(aux1->info, tamanho_aresta, &vert2->arestas);
-                insertRightifDistance(aux2->info, tamanho_aresta, &vert1->arestas);
-                return 0;
+                if(existearesta(G, vertice_1, vertice_2)==NULL)
+                {
+                    Tnode *aux2;
+                    Tnode *aux1;
+                    aux1=searchlistbyposi(vertice_1,&G->vertices);
+                    aux2=searchlistbyposi(vertice_2,&G->vertices);
+                    Vertice *vert1 = aux1->info, *vert2 = aux2->info;
+                    int retorno = 0;
+                    retorno = insertRightifDistance(aux1->info, tamanho_aresta, &vert2->arestas);
+                    if(retorno == 1)
+                    {
+                        return 1;
+                    }
+                    retorno = insertRightifDistance(aux2->info, tamanho_aresta, &vert1->arestas);
+                    if(retorno == 1)
+                    {
+                        removeRight(&vert2->arestas);
+                        return 1;
+                    }
+                    return 0;
+                }
+                else
+                {
+                    printf("Nao eh possivel colocar mais que uma\n aresta entre mesmas vertices.\n");   // caso já exista aresta entre vertices 1 e 2
+                }
             }
             else
                 printf("Vertice nao existente solicitada.\n");                  // caso vertice nao exista
