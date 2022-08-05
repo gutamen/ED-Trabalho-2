@@ -24,3 +24,5 @@ int removeAresta(Grafo *G,int vertice_1, int vertice_2);
 void printexistearesta(Grafo *G, int vertice_1, int vertice_2);
 int removeVertice(Grafo *G, int vertice);
 void printVerticeN(Grafo grafo, int vertice);
+void DestroiGrafo(Grafo *G);
+int menorAresta(Grafo G);

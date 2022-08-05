@@ -173,33 +173,39 @@ void printexistearesta(Grafo *G, int vertice_1, int vertice_2)
 
 int removeVertice(Grafo *G, int vertice1)
 {
-    if(!GrafoVazio(*G))
+    if((vertice1<leghtList(G->vertices) && vertice1>=0))
     {
-        Tnode *aux = searchlistbyposi(vertice1,&G->vertices);
-        Vertice *verticeL = aux->info;
-        while(!emptylist(verticeL->arestas))
+        if(!GrafoVazio(*G))
         {
-            Tnode *aux2 = G->vertices.first;
-            int OndeVaiAresta=0;
-            while(verticeL->arestas.first->info!=aux2->info && aux2)
+            Tnode *aux = searchlistbyposi(vertice1,&G->vertices);
+            Vertice *verticeL = aux->info;
+            while(!emptylist(verticeL->arestas))
             {
-                aux2=aux2->next;
-                OndeVaiAresta++;
-            }
-            removeAresta(G,vertice1,OndeVaiAresta);
+                Tnode *aux2 = G->vertices.first;
+                int OndeVaiAresta=0;
+                while(verticeL->arestas.first->info!=aux2->info && aux2)
+                {
+                    aux2=aux2->next;
+                    OndeVaiAresta++;
+                }
+                removeAresta(G,vertice1,OndeVaiAresta);
 
-            
-        } 
-        deletelist(&verticeL->arestas);
-        free(verticeL);
-        removelist(vertice1,&G->vertices);
-        return 0;
+                
+            } 
+            deletelist(&verticeL->arestas);
+            free(verticeL);
+            removelist(vertice1,&G->vertices);
+            return 0;
+        }
+        else
+        {
+            printf("Grafo Vazio.\n");
+            return 1;
+        }
     }
     else
-    {
-        printf("Grafo Vazio.\n");
+        printf("Vertice nao existe\n");
         return 1;
-    }
 
 }
 
@@ -230,5 +236,57 @@ void printVerticeN(Grafo grafo, int vertice)
     }
 }
 
+void DestroiGrafo(Grafo *G)
+{
+    while (!GrafoVazio(*G))
+    {
+        removeVertice(G,0);
+    }
+    deletelist(&G->vertices);
+}
 
 
+
+int menorAresta(Grafo G)
+{
+    int l=RAND_MAX,i=0,arestaP=0,verticeP=0,verticeK=0;
+    Tnode *aux =G.vertices.first;
+    if (aux == NULL)
+        printf("Grafo vazio.\n");               // se o grafo esta vazio
+    while(aux)
+    {
+        int k=0;
+        Vertice *vertice = aux->info;
+        Tnode *aux2 = vertice->arestas.first;
+        
+        while(aux2)
+        {
+            int j=0;
+            Tnode *aux3=searchlist(aux2->info,&G.vertices);
+            j=searchposiinlist(aux3,&G.vertices);
+            aux3=searchlist(aux2->info,&G.vertices);
+            //printf("\tAresta %d aponta para Vertice %d, Tamanho = %u\n",k,j,aux2->distancia);
+            if(aux2->distancia<l)
+            {
+                arestaP=k;
+                verticeP=j;
+                verticeK=i;
+                l=aux2->distancia;
+            }
+
+            aux2=aux2->next;    
+            k++;
+        }
+        
+        
+       
+        aux=aux->next;
+        i++;    
+    }
+    if(l!=RAND_MAX)
+    {
+        printf("\tMenor aresta é a que aponta do Vertice %d ate o %d, Tamanho = %u\n",verticeK,verticeP,l);
+        return 0;
+    }
+
+}
