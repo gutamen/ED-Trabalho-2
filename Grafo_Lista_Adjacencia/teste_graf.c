@@ -60,6 +60,8 @@ int main()
     {
         printf("\tVertice inserida\n\n");
     }
+
+    printGrafo(*grafo);
    
     printexistearesta(grafo,0,2);
     if(addAresta(grafo,0,2,10))
