@@ -5,7 +5,7 @@ typedef long long int Tdado;              // define o tipo de dado dentro do nod
 typedef struct Tnode
 {
     Tdado info;                 //dado armazenado no node
-    unsigned distancia;
+    int distancia;
     struct Tnode *next;         //ponteiro para o proximo node
 }Tnode;
 
@@ -19,17 +19,16 @@ typedef struct TlistSE          //define o node head da list
 
 void intitlist(TlistSE *L);
 void deletelist(TlistSE *L);
-void printlist(TlistSE L);
-short insertLeft(Tdado x, TlistSE *L);
-short insertRight(Tdado x, TlistSE *L);
+int insertLeft(Tdado x, TlistSE *L);
+int insertRight(Tdado x, TlistSE *L);
 bool emptylist(TlistSE L);
-short leghtList(TlistSE L);
+int leghtList(TlistSE L);
 Tdado removeleft(TlistSE *L);
 Tdado removeRight(TlistSE *L);
-Tnode* searchlist( Tdado x, TlistSE L);
-int searchposiinlist( Tnode *x, TlistSE L);
-Tnode* searchlistbyposi( int posi , TlistSE L);
-int insertlist(Tdado x,unsigned p,TlistSE *L);
-Tdado removelist(unsigned p,TlistSE *L);
-short insertRightifDistance(Tdado x,unsigned distancia, TlistSE *L);
+Tnode* searchlist( Tdado x, TlistSE *L);
+int searchposiinlist( Tnode *x, TlistSE *L);
+Tnode* searchlistbyposi( int posi , TlistSE *L);
+int insertlist(Tdado x,int p,TlistSE *L);
+Tdado removelist(int p,TlistSE *L);
+int insertRightifDistance(Tdado x,int distancia, TlistSE *L);
 

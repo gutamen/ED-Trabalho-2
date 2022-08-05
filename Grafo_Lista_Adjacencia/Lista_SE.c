@@ -36,24 +36,9 @@ void deletelist(TlistSE *L)                 //destruição da lista
 }
 
 
-void printlist(TlistSE L)                   //impressao da lista
-{
-    Tnode *p = L.first;
-
-    printf("[");
-    while (p)
-    {
-        printf("%lld",p->info);
-        if(p->next)
-            printf(", ");
-        p=p->next;
-    }
-    printf("]\n");
-
-}
 
 
-short insertLeft(Tdado x, TlistSE *L)       //insercao a esquerda          
+int insertLeft(Tdado x, TlistSE *L)       //insercao a esquerda          
 {
     Tnode *aux;
     aux= (Tnode*)malloc(sizeof(Tnode));
@@ -73,7 +58,7 @@ short insertLeft(Tdado x, TlistSE *L)       //insercao a esquerda
 }
 
 
-short insertRight(Tdado x, TlistSE *L)      //insercao a direita
+int insertRight(Tdado x, TlistSE *L)      //insercao a direita
 {
     Tnode *aux =(Tnode*)malloc(sizeof(Tnode));
     if(aux == NULL)
@@ -102,7 +87,7 @@ bool emptylist(TlistSE L)                   // verifica lista vazia
 }
 
 
-short leghtList(TlistSE L)                  //comprimento da lista
+int leghtList(TlistSE L)                  //comprimento da lista
 {
     return(L.lenght);
 }
@@ -146,9 +131,9 @@ Tdado removeRight(TlistSE *L)               // remocao direita
     return ret;
 }
 
-Tnode* searchlist( Tdado x, TlistSE L)      //procura na lista
+Tnode* searchlist( Tdado x, TlistSE *L)      //procura na lista
 {
-    Tnode *aux=L.first;
+    Tnode *aux=L->first;
     while(aux && x != aux->info)
     {
         aux=aux->next;
@@ -156,21 +141,24 @@ Tnode* searchlist( Tdado x, TlistSE L)      //procura na lista
     return aux;
 }
 
-int searchposiinlist( Tnode *x, TlistSE L)      //procura posição do nodo na lista
+int searchposiinlist( Tnode *x, TlistSE *L)      //procura posição do nodo na lista
 {
-    Tnode *aux=L.first;
-    int i=0;
+    Tnode *aux=L->first;
+    int k=0;
     while(aux && x != aux)
     {
         aux=aux->next;
-        i++;
+        k++;
     }
-    return i;
+    if(k<L->lenght)
+        return k;
+    else
+        return -1;
 }
 
-Tnode* searchlistbyposi( int posi , TlistSE L)      //retorna endereço do Tnode na posição desejada 
+Tnode* searchlistbyposi( int posi , TlistSE *L)      //retorna endereço do Tnode na posição desejada 
 {
-    Tnode *aux=L.first;
+    Tnode *aux=L->first;
     int i=0;
     while(aux && i < posi)
     {
@@ -181,9 +169,9 @@ Tnode* searchlistbyposi( int posi , TlistSE L)      //retorna endereço do Tnode
 }
 
 
-int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
+int insertlist(Tdado x,int p,TlistSE *L)//iserir no meio da lista
 {
-    if (p>L->lenght)
+    if (p>L->lenght || p<0)
         return 1;
     else
     {
@@ -200,7 +188,7 @@ int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
             if(!aux)
             {
                 printf("ERRO nao foi possivel alocar\n");
-                return 1;
+                return 2;
             }
             while (++i<p)
             {
@@ -216,10 +204,13 @@ int insertlist(Tdado x,unsigned p,TlistSE *L)//iserir no meio da lista
 }
 
 
-Tdado removelist(unsigned p,TlistSE *L)     //remover no meio da lista
+Tdado removelist(int p,TlistSE *L)     //remover no meio da lista
 {
-    if (p>L->lenght)
-        exit(1);
+    if (p>L->lenght || p<0)
+    {                        // printa erro
+        printf("Erro ao remover !!\n");
+        return NULL;
+    }
     else
     {
         if(p==0)                            // remover na posicao 0
@@ -246,8 +237,8 @@ Tdado removelist(unsigned p,TlistSE *L)     //remover no meio da lista
 }
 
 
-short insertRightifDistance(Tdado x,unsigned int distancia, TlistSE *L)      //insercao a direita com a distancia
-{
+int insertRightifDistance(Tdado x,int distancia, TlistSE *L)              //insercao a direita com a distancia
+{                                                                           //pensado para o vertice
     Tnode *aux =(Tnode*)malloc(sizeof(Tnode));
     if(aux == NULL)
         return 1;                           //sinaliza erro de alocacao

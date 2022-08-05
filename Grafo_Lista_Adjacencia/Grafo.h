@@ -5,16 +5,24 @@
 
 typedef struct Vertice
 {
-    TlistSE arestas;
+    TlistSE arestas;                // lista de arestas para cada vertice
 }Vertice;
 
 
 typedef struct Grafo
 {
-    TlistSE vertices; 
+    TlistSE vertices;               // lista de vertices do grafo
 }Grafo;
 
 void initGrafo(Grafo *G);
-short addVertice(Grafo *G);
-short addAresta(Grafo *G,int vertice_1,int vertice_2,unsigned tamanho_aresta);
+bool GrafoVazio(Grafo G);
+int addVertice(Grafo *G);
+int addAresta(Grafo *G,int vertice_1,int vertice_2,int tamanho_aresta);
 void printGrafo(Grafo grafo);
+Tnode* existearesta(Grafo *G, int Vertice_1, int Vertice_2);
+int removeAresta(Grafo *G,int vertice_1, int vertice_2);
+void printexistearesta(Grafo *G, int vertice_1, int vertice_2);
+int removeVertice(Grafo *G, int vertice);
+void printVerticeN(Grafo grafo, int vertice);
+void DestroiGrafo(Grafo *G);
+int menorAresta(Grafo G);
