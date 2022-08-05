@@ -34,7 +34,7 @@ public class FilaFromLista {
 
     public static void removeInFront(Fila fil){
         for(int i = 0; i < TAM; i++){
-            if(fil.isEmpty())System.out.println("Lista vazia");else{
+            if(fil.isEmpty())System.out.println("Lista vazia"){break;}else{
                 fil.removeInit();
                 System.out.print(fil.printList());
             }
@@ -42,7 +42,7 @@ public class FilaFromLista {
     }
     public static void removeInBack(Fila fil){
         for(int i = 0; i < TAM; i++){
-            if(fil.isEmpty())System.out.println("Lista vazia");else{
+            if(fil.isEmpty())System.out.println("Lista vazia"){break;}else{
                 fil.removeFinal();
                 System.out.print(fil.printList());
             }
