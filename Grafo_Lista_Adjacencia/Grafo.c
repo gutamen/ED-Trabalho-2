@@ -29,7 +29,7 @@ int addAresta(Grafo *G, int vertice_1, int vertice_2, int tamanho_aresta)   // a
     {
         if(vertice_1 != vertice_2)
         {
-            if(vertice_1<leghtList(G->vertices) && vertice_2<leghtList(G->vertices))
+            if((vertice_1<leghtList(G->vertices) && vertice_1>=0) && (vertice_2<leghtList(G->vertices) && vertice_2>=0))
             {
                 if(existearesta(G, vertice_1, vertice_2)==NULL)
                 {
@@ -66,7 +66,7 @@ int addAresta(Grafo *G, int vertice_1, int vertice_2, int tamanho_aresta)   // a
         }
     }
     else 
-        printf("Tamanho == 0 nao eh permitido.\n");                             // caso a distancia seja == 0 nao existe distancia, tarefa impossivel
+        printf("Tamanho <= 0 nao eh permitido.\n");                             // caso a distancia seja == 0 nao existe distancia, tarefa impossivel
     return 1;
 
 
@@ -106,23 +106,27 @@ void printGrafo(Grafo grafo)                    // imprime cada vertice do grafo
 
 Tnode* existearesta(Grafo *G, int vertice_1, int vertice_2)     // testa se existe aresta entre 2 vertices, retorna o nodo da aresta do vertice 1 caso exista
 {
-    Tnode *aux = searchlistbyposi(vertice_1,&G->vertices);
-    Vertice *vertice1 = aux->info;
-    aux = searchlistbyposi(vertice_2,&G->vertices);
-    Tnode *aux2 = vertice1->arestas.first;
-    while (aux2)
+    if((vertice_1<leghtList(G->vertices) && vertice_1>=0) && (vertice_2<leghtList(G->vertices) && vertice_2>=0))
     {
-        if(aux2->info==aux->info)
-            break;
-        aux2=aux2->next;
+        Tnode *aux = searchlistbyposi(vertice_1,&G->vertices);
+        Vertice *vertice1 = aux->info;
+        aux = searchlistbyposi(vertice_2,&G->vertices);
+        Tnode *aux2 = vertice1->arestas.first;
+        while (aux2)
+        {
+            if(aux2->info==aux->info)
+                break;
+            aux2=aux2->next;
+        }
+        return aux2;
     }
-    return aux2;   
+    return NULL;   
 }
 
 
 int removeAresta(Grafo *G,int vertice_1, int vertice_2)
 {
-    if(vertice_1<leghtList(G->vertices) && vertice_2<leghtList(G->vertices))
+    if((vertice_1<leghtList(G->vertices) && vertice_1>=0) && (vertice_2<leghtList(G->vertices) && vertice_2>=0))
     {
         Tnode *aux = existearesta(G, vertice_1, vertice_2);
         Tnode *aux2 = existearesta(G, vertice_2, vertice_1);
@@ -149,14 +153,21 @@ int removeAresta(Grafo *G,int vertice_1, int vertice_2)
 
 void printexistearesta(Grafo *G, int vertice_1, int vertice_2)
 {
-    Tnode *aux2 = existearesta(G,vertice_1,vertice_2);
-    if(aux2)
+    if((vertice_1<leghtList(G->vertices) && vertice_1>=0) && (vertice_2<leghtList(G->vertices) && vertice_2>=0))
     {
-        printf("Existe aresta entre os Vertices %d e %d,\nseu tamanho eh = %u\n",vertice_1,vertice_2,aux2->distancia);
+        Tnode *aux2 = existearesta(G,vertice_1,vertice_2);
+        if(aux2)
+        {
+            printf("Existe aresta entre os Vertices %d e %d,\nseu tamanho eh = %u\n",vertice_1,vertice_2,aux2->distancia);
+        }
+        else
+        {
+            printf("Nao existe aresta entre os Vertices %d e %d\n",vertice_1,vertice_2);
+        }
     }
     else
     {
-        printf("Nao existe aresta entre os Vertices %d e %d\n",vertice_1,vertice_2);
+        printf("Vertice(s) nao existe\n");
     }
 }
 
@@ -179,11 +190,16 @@ int removeVertice(Grafo *G, int vertice1)
 
             
         } 
+        deletelist(&verticeL->arestas);
+        free(verticeL);
         removelist(vertice1,&G->vertices);
+        return 0;
     }
     else
+    {
         printf("Grafo Vazio.\n");
-    return 0;
+        return 1;
+    }
 
 }
 

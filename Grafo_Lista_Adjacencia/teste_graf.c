@@ -20,11 +20,11 @@ int main()
     
     
     printGrafo(grafo);
-    removeAresta(&grafo,0,2);
+    removeVertice(&grafo,0);
 
-    printexistearesta(&grafo,0,3);
+    //printexistearesta(&grafo,0,2);
     printGrafo(grafo);
-    printVerticeN(grafo,0);
+    //printVerticeN(grafo,0);
 
 
 

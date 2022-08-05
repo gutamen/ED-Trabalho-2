@@ -15,6 +15,7 @@ typedef struct Grafo
 }Grafo;
 
 void initGrafo(Grafo *G);
+bool GrafoVazio(Grafo G);
 int addVertice(Grafo *G);
 int addAresta(Grafo *G,int vertice_1,int vertice_2,int tamanho_aresta);
 void printGrafo(Grafo grafo);
