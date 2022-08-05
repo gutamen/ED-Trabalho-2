@@ -1,6 +1,6 @@
 
 output: teste_graf.o Grafo.o Lista_SE.o Grafo_iterativo.o
-	gcc teste_graf.o Grafo.o Lista_SE.o -std=c11 -o output -w ; ./output >> teste.txt ; gcc Grafo_iterativo.o Grafo.o Lista_SE.o -std=c11 -o MenuIteracao.x -w
+	gcc teste_graf.o Grafo.o Lista_SE.o -std=c11 -o output -w ;gcc Grafo_iterativo.o Grafo.o Lista_SE.o -std=c11 -o MenuIteracao.x -w
 
 teste_graf.o: teste_graf.c
 	gcc -c teste_graf.c -w
@@ -16,6 +16,9 @@ Grafo_iterativo.o: Grafo_iterativo.c
 
 clean:
 	rm *.o output ; rm teste.txt ; rm MenuIteracao.x
+
+run:	output
+	./output >> teste.txt
 
 target: dependencies
 	action
