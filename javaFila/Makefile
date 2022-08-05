@@ -9,7 +9,7 @@ FILE= execut.jar
 
 .SUFFIXES: .java .class
 
-.java.class:
+run:
 		$(JC) $/javaFila/*.java
 		$(JDK) $(JFLAG) $(FILE) MANIFEST.MF $/javaFila/*.class
 		$(JVM) $(JAR) $(FILE) >> resultado.txt
